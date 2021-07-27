@@ -77,9 +77,12 @@ func main() {
 	elaspe = time.Now().Sub(start)
 	fmt.Printf("Producer2(3) took %v\n", elaspe)
 
-	// incorrect intializtion of waitgroup
-	wg.Add(2)
-	go producer2(1)
+	// // incorrect intializtion of waitgroup
+	// wg.Add(2)
+	// go producer2(1)
+	// wg.Wait()
+
+	launchworkers(5)
 	wg.Wait()
 }
 
@@ -129,3 +132,16 @@ sync.runtime_Semacquire(0x1193740)
         /usr/local/go/src/runtime/sema.go:56 +0x45
 
 **/
+
+// launchworkers creates 'c' goroutines using anonymous functions
+
+func launchworkers(c int) {
+	for i := 0; i < c; i++ {
+		wg.Add(1)
+		go func() {
+
+			fmt.Printf("launching goroutines annoymously %v\n", i)
+			wg.Done()
+		}()
+	}
+}
