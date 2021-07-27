@@ -64,6 +64,16 @@ func main() {
 	wg.Wait()
 	elaspe = time.Now().Sub(start)
 	fmt.Printf("Ideal wait took%v\n", elaspe)
+
+	// wait for goroutines to complete,
+	// kick off new setof gooroutines to complete
+	// synchonizing the group of goroutines
+	start = time.Now()
+	wg.Add(1)
+	go producer2(3)
+	wg.Wait()
+	elaspe = time.Now().Sub(start)
+	fmt.Printf("Producer2(3) took %v\n", elaspe)
 }
 
 func producer2(id int) {
@@ -88,15 +98,16 @@ func producer(id int) {
 	fmt.Printf("Producer # %v ran for %v\n±", id, d)
 }
 
-/* output
-ideal wait would different form non-ideal case:
-
-StartTime: 2021-07-27 18:07:55.357309 +0545 +0545 m=+0.000111459
-Producer # 1 ran for 82ms
-±Producer # 2 ran for 888ms
-±None-ideal wait took1.006546375s
-StartTime: 2021-07-27 18:07:56.364134 +0545 +0545 m=+1.006976251
+/ **
+StartTime: 2021-07-27 18:16:17.294496 +0545 +0545 m=+0.000632585
+Producer # 2 ran for 82ms
+±Producer # 1 ran for 888ms
+±None-ideal wait took1.006440291s
+StartTime: 2021-07-27 18:16:18.30093 +0545 +0545 m=+1.007105960
 Producer # 1 ran for 60ms
 ±Producer # 2 ran for 848ms
-±Ideal wait took850.397708ms
-*/
+±Ideal wait took852.757583ms
+Producer # 3 ran for 82ms
+±Producer2(3) took 87.168458ms
+
+**/
