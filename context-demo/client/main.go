@@ -19,7 +19,7 @@ func main() {
 		panic(err)
 	}
 
-	// Do() sends the httpRequest and responds http requests
+	// Do() sends the httpRequest and responds http response
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		panic(err)
