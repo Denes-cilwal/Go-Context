@@ -18,7 +18,7 @@ func Println(ctx context.Context, msg string) {
 		fmt.Println("request id not found")
 		return
 	}
-	log.Println("[%d] -> %s", v, msg)
+	log.Println("%d %s", v, msg)
 }
 
 // Decorate  function actually takes our hanlder and in this functiuon it will attach this new context
