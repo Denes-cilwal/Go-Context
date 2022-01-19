@@ -23,6 +23,7 @@ func main() {
 	}()
 
 	select {
+	// taking 2 sec to call func
 	case <-time.After(2 * time.Second):
 		fmt.Println("hello")
 		// catch the cancel context
