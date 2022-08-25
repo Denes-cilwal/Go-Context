@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context-demo/context-demo/logger.go"
+	"context-demo/context-demo/logger"
 	"fmt"
 	"log"
 	"net/http"
@@ -21,7 +21,7 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	select {
-	// after 2 sec, call func, but ctx timeout is set of 1 sec
+	// after 1 sec, call func, but ctx timeout is set of 2 sec
 	case <-time.After(2 * time.Second):
 		fmt.Fprintln(w, "Hello")
 	case <-ctx.Done():

@@ -12,12 +12,12 @@ import (
 func Println(ctx context.Context, msg string) {
 	// get value from the context with key
 	v, ok := ctx.Value("requestID").(int64)
-	fmt.Println(v)
+	fmt.Println(v, "id is")
 	if !ok {
 		fmt.Println("request id not found")
 		return
 	}
-	log.Printf("%v -> %s", v, msg)
+	log.Printf("%d -> %s", v, msg)
 }
 
 func Decorator(f http.HandlerFunc) http.HandlerFunc {
